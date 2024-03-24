@@ -1,0 +1,11 @@
+load("@rules_python//python:defs.bzl", "py_binary", "py_library", "py_test")
+
+py_binary(
+    name = "testbin",
+    srcs = ["bin/testbin.py"],
+    main = "bin/testbin.py",
+    # visibility = ["//:__subpackages__"],
+    deps = [
+        "@pip//numpy:pkg",
+    ],
+)
