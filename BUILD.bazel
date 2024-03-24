@@ -1,4 +1,13 @@
 load("@rules_python//python:defs.bzl", "py_binary", "py_library", "py_test")
+load("@rules_python//python:pip.bzl", "compile_pip_requirements")
+
+# This rule adds a convenient way to update the requirements file.
+compile_pip_requirements(
+    name = "requirements",
+    src = "requirements.in",
+    requirements_txt = "requirements_lock.txt",
+    requirements_windows = "requirements_windows.txt",
+)
 
 py_binary(
     name = "testbin",
@@ -7,5 +16,27 @@ py_binary(
     # visibility = ["//:__subpackages__"],
     deps = [
         "@pip//numpy:pkg",
+        "@pip//pytest:pkg",
+        ":testlib"
+    ],
+)
+
+py_library(
+    name = "testlib",
+    srcs = [
+        "testlib/__init__.py",
+        "testlib/dummy.py",
+    ],
+    deps = [],
+)
+
+py_test(
+    name = "simpletest",
+    srcs = ["test/test_testlib.py"],
+    main = "test/test_testlib.py",
+    deps = [
+        ":testlib",
+        "@pip//numpy:pkg",
+        "@pip//pytest:pkg",
     ],
 )

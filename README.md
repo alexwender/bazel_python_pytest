@@ -6,3 +6,12 @@ Testing Bazel with python and pytest
 Bazel `rules_python` documentation:
 * [rules-python readthedocs](https://rules-python.readthedocs.io/en/latest/index.html)
 * Useful example taken from the doc regarding pip dependencies: https://github.com/bazelbuild/rules_python/blob/main/examples/pip_parse/MODULE.bazel
+
+## Update requirements
+
+Please run
+```shell
+bazel run //:requirements.update
+```
+
+After editing the `requirements.in` file.
